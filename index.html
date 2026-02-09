@@ -3,69 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <title>Nosso Amor é Infinito</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
-body{
-margin:0;
-font-family:Arial;
-background:linear-gradient(135deg,#ff4b7d,#ff9a9e);
-height:100vh;
-overflow:hidden;
-color:white;
+body {
+  margin:0;
+  font-family: Arial;
+  background: linear-gradient(135deg,#ff4b7d,#ff9a9e);
+  height:100vh;
+  overflow:hidden;
+  color:white;
 }
 
-#contador{
-position:fixed;
-top:10px;
-width:100%;
-text-align:center;
-z-index:5;
+#contador {
+  position:fixed;
+  top:10px;
+  width:100%;
+  text-align:center;
+  font-size:18px;
+  z-index:5;
 }
 
-.popup{
-position:absolute;
-background:white;
-color:#ff4b7d;
-padding:12px 18px;
-border-radius:15px;
-box-shadow:0 5px 15px rgba(0,0,0,.4);
-cursor:pointer;
-user-select:none;
+.popup {
+  position:absolute;
+  background:white;
+  color:#ff4b7d;
+  padding:12px 18px;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,.4);
+  cursor:pointer;
 }
 
-.heart{
-position:fixed;
-top:-10px;
-font-size:20px;
-animation:fall linear infinite;
+.heart {
+  position:fixed;
+  top:-10px;
+  font-size:20px;
+  animation: fall linear infinite;
 }
 
-@keyframes fall{
-to{transform:translateY(110vh);}
+@keyframes fall {
+  to { transform: translateY(110vh); }
 }
 
-#final{
-display:none;
-position:fixed;
-inset:0;
-background:white;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-z-index:999;
+#final {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:white;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:999;
 }
 
-#final h1{
-font-family:'Pacifico',cursive;
-color:#ff4b7d;
-font-size:48px;
-text-align:center;
+#final h1 {
+  font-family:'Pacifico',cursive;
+  color:#ff4b7d;
+  font-size:48px;
+  text-align:center;
 }
 
-#final p{
-color:#888;
+#final p {
+  color:#888;
+  margin-top:10px;
 }
 </style>
 </head>
@@ -75,135 +75,97 @@ color:#888;
 <div id="contador"></div>
 
 <div id="final">
-<h1>Eu te amo mil milhões ❤️</h1>
-<p>— tipo Vingadores mesmo 😅</p>
+  <h1>Eu te amo mil milhões ❤️</h1>
+  <p>— tipo Vingadores mesmo 😅</p>
 </div>
 
 <script>
-const inicio=new Date("2010-03-19");
 
-function atualizar(){
-const agora=new Date();
-let anos=agora.getFullYear()-inicio.getFullYear();
-let meses=agora.getMonth()-inicio.getMonth();
-let dias=agora.getDate()-inicio.getDate();
+// ===== CONTADOR JUNTOS =====
+const inicio = new Date("2010-03-19");
 
-if(dias<0){meses--;dias+=30;}
-if(meses<0){anos--;meses+=12;}
+function atualizarContador() {
+  const agora = new Date();
+  let anos = agora.getFullYear() - inicio.getFullYear();
+  let meses = agora.getMonth() - inicio.getMonth();
+  let dias = agora.getDate() - inicio.getDate();
 
-contador.innerHTML=`Desde 19/03/2010 ❤️<br>${anos} anos ${meses} meses ${dias} dias`;
+  if (dias < 0) { meses--; dias += 30; }
+  if (meses < 0) { anos--; meses += 12; }
+
+  contador.innerHTML = 
+    `Desde 19/03/2010 ❤️<br>`+
+    `${anos} anos, ${meses} meses, ${dias} dias juntos 💕`;
 }
-setInterval(atualizar,1000); atualizar();
 
+setInterval(atualizarContador, 1000);
+atualizarContador();
+
+// ===== MENSAGENS DOS POPUPS =====
 const frases = [
-"Eu te amo ❤️",
-"Meu tudo",
-"Minha eternidade",
-"Você é meu lar",
-"Amor infinito ♾️",
-"Minha melhor escolha",
-"Pra sempre nós",
-"Meu coração é seu",
-"Minha paz",
-"Meu mundo",
-
-"16 anos e contando… 💍",
-"Minha companheira de vida",
-"Você é meu milagre",
-"Meu sorriso tem seu nome",
-"Com você, tudo faz sentido",
-"Minha melhor história",
-"Te escolheria em todas as vidas",
-"Meu final feliz começou com você",
-"Seu abraço é minha casa",
-"Minha alma reconhece a sua",
-
-"Desde 19/03/2010 ❤️",
-"Obrigada por nunca soltar minha mão",
-"Amar você é fácil",
-"Você é minha sorte",
-"Meu para sempre tem seu rosto",
-"Te amo mais a cada clique 😏",
-"Você é meu presente favorito",
-"Minha pessoa favorita no mundo",
-
-"Mesmo no caos, eu escolho você",
-"Meu coração bate no seu ritmo",
-"Você é minha calmaria",
-"Minha melhor decisão",
-"Minha rainha 👑",
-"Meu amor eterno",
-"Meu universo particular",
-"Meu sonho realizado",
-"Você é poesia",
-
-"E se eu tivesse mil vidas… em todas seria você",
-"Amor que não acaba",
-"Minha metade perfeita",
-"Meu porto seguro",
-"Meu lar é você",
-"Pra sempre + infinito",
-
-"Te amo mil milhões ❤️",
-"Tipo Vingadores mesmo 😅",
-"Nosso amor é invencível",
-"Você é meu final feliz",
-"Obrigada por existir",
-"Meu amor cresce exponencialmente 😂"
+  "Eu te amo ❤️","Meu tudo","Minha eternidade","Você é meu lar",
+  "Amor infinito ♾️","Minha melhor escolha","Pra sempre nós",
+  "Meu coração é seu","Minha paz","Meu mundo","Minha alegria",
+  "Você é minha vida","Meu sorriso diário","Pra sempre ao seu lado",
+  "Obrigado por existir","Você é meu destino","Meu amor cresce",
+  "Minha metade perfeita","Meu eterno lar","Você é meu presente"
 ];
 
+let cliques = 0;
 
-let cliques=0;
+// ===== PROGRAMA FINAL =====
+function showFinal() {
+  document.querySelectorAll(".popup").forEach(p => p.remove());
+  contador.remove();
+  final.style.display = "flex";
 
-function criarPopup(){
-const d=document.createElement("div");
-d.className="popup";
-d.innerHTML=frases[Math.floor(Math.random()*frases.length)];
-d.style.left=Math.random()*80+"%";
-d.style.top=Math.random()*80+"%";
-
-d.onclick=()=>{
-cliques++;
-
-if(cliques===10) alert("10 cliques 😍");
-if(cliques===25) alert("25 cliques ❤️");
-if(cliques===50) alert("50 cliques 💕");
-if(cliques===100) alert("100 cliques... prepare-se");
-
-if(cliques>=101){
-finalMarvel();
-return;
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.animationDuration = Math.random()*2+1+"s";
+    document.body.appendChild(heart);
+  }, 80);
 }
 
-// EXPONENCIAL REAL
-const existentes=document.querySelectorAll(".popup").length;
-d.remove();
+// ===== CRIAR POPUP =====
+function criarPopup() {
+  const div = document.createElement("div");
+  div.className = "popup";
+  div.innerHTML = frases[Math.floor(Math.random()*frases.length)];
 
-for(let i=0;i<existentes;i++){
+  div.style.left = Math.random()*80 + "%";
+  div.style.top = Math.random()*80 + "%";
+
+  div.onclick = () => {
+    cliques++;
+
+    if (cliques === 10) alert("10 cliques 😍");
+    if (cliques === 25) alert("25 cliques ❤️");
+    if (cliques === 50) alert("50 cliques 💕");
+    if (cliques === 100) alert("100 cliques... prepare-se!");
+
+    if (cliques >= 101) {
+      showFinal();
+      return;
+    }
+
+    // DUPLICAÇÃO EXPONENCIAL REAL
+    const existentes = document.querySelectorAll(".popup").length;
+    div.remove();
+
+    for (let i = 0; i < existentes; i++) {
+      criarPopup();
+    }
+  };
+
+  document.body.appendChild(div);
+}
+
+// ===== INICIA =====
 criarPopup();
-}
-};
 
-document.body.appendChild(d);
-}
-
-function finalMarvel(){
-document.querySelectorAll(".popup").forEach(p=>p.remove());
-contador.remove();
-final.style.display="flex";
-
-setInterval(()=>{
-const h=document.createElement("div");
-h.className="heart";
-h.innerHTML="❤️";
-h.style.left=Math.random()*100+"vw";
-h.style.animationDuration=Math.random()*2+1+"s";
-document.body.appendChild(h);
-},80);
-}
-
-// começa com 1
-criarPopup();
 </script>
 
 </body>
