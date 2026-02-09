@@ -2,70 +2,67 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Nosso Amor é Infinito</title>
+<title>Nosso Amor Infinito</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin:0;
-  font-family: Arial;
-  background: linear-gradient(135deg,#ff4b7d,#ff9a9e);
-  height:100vh;
-  overflow:hidden;
-  color:white;
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#ff4b7d,#ff9a9e);
+height:100vh;
+overflow:hidden;
 }
 
-#contador {
-  position:fixed;
-  top:10px;
-  width:100%;
-  text-align:center;
-  font-size:18px;
-  z-index:5;
+#contador{
+position:fixed;
+top:10px;
+width:100%;
+text-align:center;
+color:white;
+z-index:10;
 }
 
-.popup {
-  position:absolute;
-  background:white;
-  color:#ff4b7d;
-  padding:12px 18px;
-  border-radius:15px;
-  box-shadow:0 5px 15px rgba(0,0,0,.4);
-  cursor:pointer;
+.popup{
+position:absolute;
+background:white;
+color:#ff4b7d;
+padding:10px 16px;
+border-radius:15px;
+box-shadow:0 4px 12px rgba(0,0,0,.4);
+cursor:pointer;
+white-space:nowrap;
 }
 
-.heart {
-  position:fixed;
-  top:-10px;
-  font-size:20px;
-  animation: fall linear infinite;
+#final{
+display:none;
+position:fixed;
+inset:0;
+background:white;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:999;
 }
 
-@keyframes fall {
-  to { transform: translateY(110vh); }
+#final h1{
+font-family:Pacifico;
+font-size:50px;
+color:#ff4b7d;
 }
 
-#final {
-  display:none;
-  position:fixed;
-  inset:0;
-  background:white;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  z-index:999;
+#final p{color:#777;}
+
+.heart{
+position:fixed;
+top:-10px;
+font-size:22px;
+animation:fall linear infinite;
 }
 
-#final h1 {
-  font-family:'Pacifico',cursive;
-  color:#ff4b7d;
-  font-size:48px;
-  text-align:center;
-}
-
-#final p {
-  color:#888;
-  margin-top:10px;
+@keyframes fall{
+to{transform:translateY(110vh);}
 }
 </style>
 </head>
@@ -75,33 +72,30 @@ body {
 <div id="contador"></div>
 
 <div id="final">
-  <h1>Eu te amo mil milhões ❤️</h1>
-  <p>— tipo Vingadores mesmo 😅</p>
+<h1>Eu te amo mil milhões ❤️</h1>
 </div>
 
 <script>
 
-// ===== CONTADOR JUNTOS =====
 const inicio = new Date("2010-03-19");
 
-function atualizarContador() {
-  const agora = new Date();
-  let anos = agora.getFullYear() - inicio.getFullYear();
-  let meses = agora.getMonth() - inicio.getMonth();
-  let dias = agora.getDate() - inicio.getDate();
+function atualizar(){
+const agora=new Date();
+let anos=agora.getFullYear()-inicio.getFullYear();
+let meses=agora.getMonth()-inicio.getMonth();
+let dias=agora.getDate()-inicio.getDate();
+let horas=agora.getHours()-inicio.getHours();
 
-  if (dias < 0) { meses--; dias += 30; }
-  if (meses < 0) { anos--; meses += 12; }
+if(horas<0){dias--;horas+=24;}
+if(dias<0){meses--;dias+=30;}
+if(meses<0){anos--;meses+=12;}
 
-  contador.innerHTML = 
-    `Desde 19/03/2010 ❤️<br>`+
-    `${anos} anos, ${meses} meses, ${dias} dias juntos 💕`;
+contador.innerHTML=`Desde 19/03/2010 ❤️<br>${anos} anos ${meses} meses ${dias} dias ${horas} horas juntos`;
 }
 
-setInterval(atualizarContador, 1000);
-atualizarContador();
+setInterval(atualizar,1000);
+atualizar();
 
-// ===== MENSAGENS DOS POPUPS =====
 const frases = [
 "Eu te amo ❤️",
 "Meu tudo",
@@ -160,60 +154,56 @@ const frases = [
 ];
 
 
-let cliques = 0;
+let cliques=0;
+let totalPopups=1;
+const LIMITE=120;
 
-// ===== PROGRAMA FINAL =====
-function showFinal() {
-  document.querySelectorAll(".popup").forEach(p => p.remove());
-  contador.remove();
-  final.style.display = "flex";
+function criarPopup(){
+const d=document.createElement("div");
+d.className="popup";
+d.innerHTML=frases[Math.floor(Math.random()*frases.length)];
+d.style.left=Math.random()*80+"%";
+d.style.top=Math.random()*80+"%";
 
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.animationDuration = Math.random()*2+1+"s";
-    document.body.appendChild(heart);
-  }, 80);
+d.onclick=()=>clicou(d);
+
+document.body.appendChild(d);
 }
 
-// ===== CRIAR POPUP =====
-function criarPopup() {
-  const div = document.createElement("div");
-  div.className = "popup";
-  div.innerHTML = frases[Math.floor(Math.random()*frases.length)];
+function clicou(div){
+cliques++;
 
-  div.style.left = Math.random()*80 + "%";
-  div.style.top = Math.random()*80 + "%";
+if(cliques==10)alert("10 cliques 😍");
+if(cliques==25)alert("25 cliques ❤️");
+if(cliques==50)alert("50 cliques 💕");
+if(cliques==100)alert("Prepare-se...");
 
-div.onclick = () => {
-  cliques++;
+if(cliques>=101){final();return;}
 
-  if (cliques === 10) alert("10 cliques 😍");
-  if (cliques === 25) alert("25 cliques ❤️");
-  if (cliques === 50) alert("50 cliques 💕");
-  if (cliques === 100) alert("100 cliques... prepare-se!");
+let criar=Math.min(totalPopups, LIMITE-totalPopups);
 
-  if (cliques >= 101) {
-    showFinal();
-    return;
-  }
+for(let i=0;i<criar;i++)criarPopup();
 
-  const total = document.querySelectorAll(".popup").length;
+totalPopups+=criar;
 
-  // cria MAIS O TOTAL ATUAL (duplica)
-  for (let i = 0; i < total; i++) {
-    criarPopup();
-  }
-};
-
-
-
-  document.body.appendChild(div);
+div.remove();
 }
 
-// ===== INICIA =====
+function final(){
+document.querySelectorAll(".popup").forEach(p=>p.remove());
+contador.remove();
+document.getElementById("final").style.display="flex";
+
+setInterval(()=>{
+const h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=Math.random()*2+1+"s";
+document.body.appendChild(h);
+},60);
+}
+
 criarPopup();
 
 </script>
