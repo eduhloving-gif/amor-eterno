@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>Nosso Amor é Infinito</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
 <style>
 body {
 margin:0;
@@ -51,6 +53,29 @@ animation:fall linear infinite;
 @keyframes fall {
 to { transform: translateY(110vh); }
 }
+
+#final {
+display:none;
+position:fixed;
+inset:0;
+background:white;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:999;
+}
+
+#final h1 {
+font-family:'Pacifico', cursive;
+color:#ff4b7d;
+font-size:48px;
+text-align:center;
+}
+
+#final p {
+color:#888;
+margin-top:10px;
+}
 </style>
 </head>
 
@@ -58,112 +83,89 @@ to { transform: translateY(110vh); }
 
 <div id="contador"></div>
 
+<div id="final">
+<h1>Eu te amo mil milhões ❤️</h1>
+<p>— tipo Vingadores mesmo 😅</p>
+</div>
+
 <script>
 const inicio = new Date("2010-03-19");
 
 function atualizar() {
-const agora = new Date();
+const agora=new Date();
+let anos=agora.getFullYear()-inicio.getFullYear();
+let meses=agora.getMonth()-inicio.getMonth();
+let dias=agora.getDate()-inicio.getDate();
+let horas=agora.getHours()-inicio.getHours();
 
-let anos = agora.getFullYear() - inicio.getFullYear();
-let meses = agora.getMonth() - inicio.getMonth();
-let dias = agora.getDate() - inicio.getDate();
-let horas = agora.getHours() - inicio.getHours();
+if(horas<0){horas+=24;dias--;}
+if(dias<0){meses--;dias+=new Date(agora.getFullYear(),agora.getMonth(),0).getDate();}
+if(meses<0){anos--;meses+=12;}
 
-if (horas < 0) {
-horas += 24;
-dias--;
+contador.innerHTML="Desde 19/03/2010 ❤️<br>Juntos há:<br><b>"+anos+
+"</b> anos, <b>"+meses+"</b> meses,<br><b>"+dias+
+"</b> dias e <b>"+horas+"</b> horas 💕";
 }
 
-if (dias < 0) {
-meses--;
-const ultimoDia = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
-dias += ultimoDia;
-}
+setInterval(atualizar,1000); atualizar();
 
-if (meses < 0) {
-anos--;
-meses += 12;
-}
-
-document.getElementById("contador").innerHTML =
-"Desde 19/03/2010 ❤️<br>" +
-"Juntos há:<br>" +
-"<b>"+anos+"</b> anos, <b>"+meses+"</b> meses,<br>" +
-"<b>"+dias+"</b> dias e <b>"+horas+"</b> horas 💕";
-}
-
-atualizar();
-setInterval(atualizar,1000);
-
-let cliques = 0;
-
-const mensagens = [
-"Eu te amo ❤️",
-"Minha melhor escolha",
-"16 anos do seu lado 😍",
-"Você é meu lar",
-"Minha eternidade",
-"Te escolheria mil vezes",
-"Nem clicando você foge 😌",
-"Meu coração é seu",
-"Obrigado por existir",
-"Companheira de vida",
-"Meu porto seguro",
-"Você é meu mundo",
-"Minha paz",
-"Meu sorriso diário",
-"Amor da minha vida",
-"Só nós dois 💕",
-"Pra sempre começa hoje",
-"Meu tudo",
-"Você é meu destino",
-"Amor infinito ♾️"
+const mensagens=[
+"Eu te amo ❤️","Minha melhor escolha","Você é meu lar","Minha eternidade",
+"Te escolheria mil vezes","Meu coração é seu","Companheira de vida",
+"Meu porto seguro","Você é meu mundo","Minha paz","Meu sorriso diário",
+"Amor da minha vida","Só nós dois 💕","Meu tudo","Destino","Amor infinito ♾️"
 ];
 
-function mensagemSecreta() {
-if (cliques === 10) alert("10 cliques 😍 Já deu pra perceber que eu te amo né?");
-if (cliques === 25) alert("25 cliques ❤️ Obrigado por caminhar comigo nesses 16 anos.");
-if (cliques === 50) alert("50 cliques 💕 Você é minha melhor história.");
-if (cliques === 100) alert("100 cliques 😭 Agora já sabe: eu nunca vou desistir da gente.");
+let cliques=0;
+
+function segredo(){
+if(cliques==10) alert("10 cliques 😍 Já deu pra perceber que eu te amo né?");
+if(cliques==25) alert("25 cliques ❤️ Obrigado por caminhar comigo nesses 16 anos.");
+if(cliques==50) alert("50 cliques 💕 Você é minha melhor história.");
+if(cliques==100) alert("100 cliques 😭 Prepare-se...");
 }
 
-function criarPopup() {
-const div = document.createElement("div");
-div.className = "popup";
-div.innerHTML = mensagens[Math.floor(Math.random()*mensagens.length)];
+function finalMarvel(){
+document.body.innerHTML="";
+document.body.appendChild(document.getElementById("final"));
+final.style.display="flex";
 
-div.style.left = Math.random()*70 + "%";
-div.style.top = Math.random()*70 + "%";
+setInterval(()=>{
+const h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=Math.random()*2+1+"s";
+document.body.appendChild(h);
+},100);
+}
 
-div.onclick = () => {
+function criarPopup(){
+const d=document.createElement("div");
+d.className="popup";
+d.innerHTML=mensagens[Math.floor(Math.random()*mensagens.length)];
+d.style.left=Math.random()*80+"%";
+d.style.top=Math.random()*80+"%";
+
+d.onclick=()=>{
 cliques++;
-mensagemSecreta();
-div.remove();
-setTimeout(criarPopup,150);
+segredo();
+d.remove();
+
+if(cliques>=101){
+finalMarvel();
+return;
+}
+
+// duplica
+criarPopup();
+criarPopup();
 };
 
-document.body.appendChild(div);
+document.body.appendChild(d);
 }
 
-// inicia
 criarPopup();
-criarPopup();
-criarPopup();
-
-// loop infinito
-setInterval(criarPopup,1500);
-
-// corações
-setInterval(() => {
-const heart = document.createElement("div");
-heart.classList.add("heart");
-heart.innerHTML = "❤️";
-heart.style.left = Math.random()*100 + "vw";
-heart.style.animationDuration = Math.random()*3+2+"s";
-document.body.appendChild(heart);
-
-setTimeout(()=>heart.remove(),5000);
-},300);
 </script>
 
 </body>
