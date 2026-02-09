@@ -103,13 +103,62 @@ atualizarContador();
 
 // ===== MENSAGENS DOS POPUPS =====
 const frases = [
-  "Eu te amo ❤️","Meu tudo","Minha eternidade","Você é meu lar",
-  "Amor infinito ♾️","Minha melhor escolha","Pra sempre nós",
-  "Meu coração é seu","Minha paz","Meu mundo","Minha alegria",
-  "Você é minha vida","Meu sorriso diário","Pra sempre ao seu lado",
-  "Obrigado por existir","Você é meu destino","Meu amor cresce",
-  "Minha metade perfeita","Meu eterno lar","Você é meu presente"
+"Eu te amo ❤️",
+"Meu tudo",
+"Minha eternidade",
+"Você é meu lar",
+"Amor infinito ♾️",
+"Minha melhor escolha",
+"Pra sempre nós",
+"Meu coração é seu",
+"Minha paz",
+"Meu mundo",
+
+"16 anos e contando… 💍",
+"Minha companheira de vida",
+"Você é meu milagre",
+"Meu sorriso tem seu nome",
+"Com você, tudo faz sentido",
+"Minha melhor história",
+"Te escolheria em todas as vidas",
+"Meu final feliz começou com você",
+"Seu abraço é minha casa",
+"Minha alma reconhece a sua",
+
+"Desde 19/03/2010 ❤️",
+"Obrigada por nunca soltar minha mão",
+"Amar você é fácil",
+"Você é minha sorte",
+"Meu para sempre tem seu rosto",
+"Te amo mais a cada clique 😏",
+"Você é meu presente favorito",
+"Minha pessoa favorita no mundo",
+
+"Mesmo no caos, eu escolho você",
+"Meu coração bate no seu ritmo",
+"Você é minha calmaria",
+"Minha melhor decisão",
+"Minha rainha 👑",
+"Meu amor eterno",
+"Meu universo particular",
+"Meu sonho realizado",
+"Você é poesia",
+
+"E se eu tivesse mil vidas… em todas seria você",
+"Amor que não acaba",
+"Minha metade perfeita",
+"Meu porto seguro",
+"Meu lar é você",
+"Pra sempre + infinito",
+
+"Te amo mil milhões ❤️",
+"Tipo Vingadores mesmo 😅",
+"Nosso amor é invencível",
+"Você é meu final feliz",
+"Obrigada por existir",
+"Meu amor cresce exponencialmente 😂"
 ];
+
 
 let cliques = 0;
 
@@ -146,19 +195,19 @@ div.onclick = () => {
   if (cliques === 50) alert("50 cliques 💕");
   if (cliques === 100) alert("100 cliques... prepare-se!");
 
-  const total = document.querySelectorAll(".popup").length;
-
   if (cliques >= 101) {
     showFinal();
     return;
   }
 
+  const total = document.querySelectorAll(".popup").length;
+
+  // cria MAIS O TOTAL ATUAL (duplica)
   for (let i = 0; i < total; i++) {
     criarPopup();
   }
-
-  div.remove();
 };
+
 
 
   document.body.appendChild(div);
