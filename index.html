@@ -138,27 +138,28 @@ function criarPopup() {
   div.style.left = Math.random()*80 + "%";
   div.style.top = Math.random()*80 + "%";
 
-  div.onclick = () => {
-    cliques++;
+div.onclick = () => {
+  cliques++;
 
-    if (cliques === 10) alert("10 cliques 😍");
-    if (cliques === 25) alert("25 cliques ❤️");
-    if (cliques === 50) alert("50 cliques 💕");
-    if (cliques === 100) alert("100 cliques... prepare-se!");
+  if (cliques === 10) alert("10 cliques 😍");
+  if (cliques === 25) alert("25 cliques ❤️");
+  if (cliques === 50) alert("50 cliques 💕");
+  if (cliques === 100) alert("100 cliques... prepare-se!");
 
-    if (cliques >= 101) {
-      showFinal();
-      return;
-    }
+  const total = document.querySelectorAll(".popup").length;
 
-    // DUPLICAÇÃO EXPONENCIAL REAL
-    const existentes = document.querySelectorAll(".popup").length;
-    div.remove();
+  if (cliques >= 101) {
+    showFinal();
+    return;
+  }
 
-    for (let i = 0; i < existentes; i++) {
-      criarPopup();
-    }
-  };
+  for (let i = 0; i < total; i++) {
+    criarPopup();
+  }
+
+  div.remove();
+};
+
 
   document.body.appendChild(div);
 }
