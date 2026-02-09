@@ -20,6 +20,7 @@ top:10px;
 width:100%;
 text-align:center;
 font-size:18px;
+z-index:5;
 }
 
 .popup {
@@ -60,22 +61,6 @@ to { transform: translateY(110vh); }
 <script>
 const inicio = new Date("2010-03-19");
 
-const mensagens = [
-"Eu te amo ❤️",
-"16 anos do seu lado 😍",
-"Você é meu lar",
-"Minha melhor escolha",
-"Pra sempre nós dois",
-"Nem clicando você foge 😌",
-"Meu amor é infinito",
-"Você é minha eternidade",
-"Obrigado por existir",
-"Te escolheria mil vezes",
-"Meu coração é seu",
-"Companheira de vida ❤️"
-];
-
-// contador
 function atualizar() {
 const agora = new Date();
 
@@ -108,36 +93,67 @@ document.getElementById("contador").innerHTML =
 }
 
 atualizar();
-setInterval(atualizar, 1000);
+setInterval(atualizar,1000);
 
+let cliques = 0;
 
-// cria popup eterno
+const mensagens = [
+"Eu te amo ❤️",
+"Minha melhor escolha",
+"16 anos do seu lado 😍",
+"Você é meu lar",
+"Minha eternidade",
+"Te escolheria mil vezes",
+"Nem clicando você foge 😌",
+"Meu coração é seu",
+"Obrigado por existir",
+"Companheira de vida",
+"Meu porto seguro",
+"Você é meu mundo",
+"Minha paz",
+"Meu sorriso diário",
+"Amor da minha vida",
+"Só nós dois 💕",
+"Pra sempre começa hoje",
+"Meu tudo",
+"Você é meu destino",
+"Amor infinito ♾️"
+];
+
+function mensagemSecreta() {
+if (cliques === 10) alert("10 cliques 😍 Já deu pra perceber que eu te amo né?");
+if (cliques === 25) alert("25 cliques ❤️ Obrigado por caminhar comigo nesses 16 anos.");
+if (cliques === 50) alert("50 cliques 💕 Você é minha melhor história.");
+if (cliques === 100) alert("100 cliques 😭 Agora já sabe: eu nunca vou desistir da gente.");
+}
+
 function criarPopup() {
 const div = document.createElement("div");
 div.className = "popup";
-
 div.innerHTML = mensagens[Math.floor(Math.random()*mensagens.length)];
 
 div.style.left = Math.random()*70 + "%";
 div.style.top = Math.random()*70 + "%";
 
 div.onclick = () => {
+cliques++;
+mensagemSecreta();
 div.remove();
-setTimeout(criarPopup,200);
+setTimeout(criarPopup,150);
 };
 
 document.body.appendChild(div);
 }
 
-// começa com 3
+// inicia
 criarPopup();
 criarPopup();
 criarPopup();
 
-// cria sempre novos
-setInterval(criarPopup,2000);
+// loop infinito
+setInterval(criarPopup,1500);
 
-// corações caindo
+// corações
 setInterval(() => {
 const heart = document.createElement("div");
 heart.classList.add("heart");
@@ -148,7 +164,6 @@ document.body.appendChild(heart);
 
 setTimeout(()=>heart.remove(),5000);
 },300);
-
 </script>
 
 </body>
